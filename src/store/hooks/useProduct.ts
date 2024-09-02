@@ -1,7 +1,11 @@
 import { useState, useCallback } from "react";
 import { createPublicAxiosInstance } from "./axiosConfig";
 import { useAppDispatch } from "@/store";
-import { setProductsState } from "@/store/slices";
+import {
+  setProductsState,
+  setColorsState,
+  setSizesState,
+} from "@/store/slices";
 
 const axios = createPublicAxiosInstance();
 
@@ -28,14 +32,14 @@ const useProduct = () => {
     }
   }, [dispatch]); // Dependencias de useCallback
 
-  const fetchFeaturedProducts = useCallback(async () => {
+  const fetchColors = useCallback(async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await axios.get("/products/featured");
+      const response = await axios.get("/products/colors");
       // Despachar las categorías al estado global de Redux
-      dispatch(setProductsState(response.data));
+      dispatch(setColorsState(response.data));
       return response.data;
     } catch (err: any) {
       setError(err.response?.data?.message || "An error occurred");
@@ -45,7 +49,24 @@ const useProduct = () => {
     }
   }, [dispatch]); // Dependencias de useCallback
 
-  return { loading, error, fetchProducts, fetchFeaturedProducts };
+  const fetchSizes = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.get("/products/sizes");
+      // Despachar las categorías al estado global de Redux
+      dispatch(setSizesState(response.data));
+      return response.data;
+    } catch (err: any) {
+      setError(err.response?.data?.message || "An error occurred");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, [dispatch]); // Dependencias de useCallback
+
+  return { loading, error, fetchProducts, fetchColors, fetchSizes };
 };
 
 export default useProduct;

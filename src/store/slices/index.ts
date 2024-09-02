@@ -20,6 +20,12 @@ import {
   addProduct,
   removeProduct,
   clearProductsState,
+  setColorsState,
+  setSizesState,
+  setProductColors,
+  setProductSizes,
+  selectProductColors,
+  selectProductSizes,
 } from "./productSlice";
 
 export {
@@ -38,4 +44,10 @@ export {
   addProduct,
   removeProduct,
   clearProductsState,
+  setColorsState,
+  setSizesState,
+  setProductColors,
+  setProductSizes,
+  selectProductColors,
+  selectProductSizes,
 };

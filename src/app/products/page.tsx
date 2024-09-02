@@ -6,7 +6,7 @@ function ProductsPage() {
     <React.Fragment>
       <Navbar />
 
-      <div className="flex justify-center py-[60px]">
+      <div className="flex justify-center pt-4">
         <div className="w-full max-w-[1200px] flex">
           {/* Sidebar */}
           <div className="w-[225px] p-4 hidden lg:block">
@@ -14,7 +14,7 @@ function ProductsPage() {
           </div>
 
           {/* Body */}
-          <div className="flex-1 bg-white p-4">
+          <div className="flex-1 bg-white mx-2">
             <Products />
           </div>
         </div>

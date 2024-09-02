@@ -32,38 +32,43 @@ function Products() {
   // Calcula el número total de páginas
   const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
 
+  const addToCart = (e: any) => {
+    e.preventDefault();
+    console.log("addToCart")
+  }
+
   return (
     <React.Fragment>
       <div className="max-w-[1200px] mx-auto">
-        <div className="w-full max-w-[900px]">
-          <div className="grid grid-cols-3 gap-6">
+        <div className="w-full max-w-[1200px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {currentProducts.map((product) => (
-              <Link href={`/productos/${product.slug}`} key={product.id} className="flex flex-col h-full relative bg-white rounded-md overflow-hidden">
-                <div className="flex-grow relative">
+              <Link href={`/productos/${product.slug}`} key={product.id} className="relative flex flex-col bg-white rounded-md overflow-hidden shadow-lg transition-transform transform hover:scale-105 group">
+                <div className="relative flex-grow">
                   <Image
                     src={product.image || placeholderImage}
                     alt={product.name || "Product Image"}
                     className="w-full h-[200px] object-cover"
-                    width={115}
-                    height={68}
+                    width={500}
+                    height={300}
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-20 rounded-[4px] hidden" />
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                    <div className="text-center text-white">
-                      <Button className="bg-[#0a1d35] text-white rounded-[4px] px-8 hidden group-hover:block" data-hover={false}>
-                        Add to cart
-                      </Button>
-                    </div>
-                  </div>
+                  <div className="absolute inset-0 bg-black bg-opacity-30 rounded-md opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
+                  <Button
+                    onClick={addToCart}
+                    className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-[#0a1d35] text-white rounded-md px-8 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    data-hover={false}
+                  >
+                    Add to cart
+                  </Button>
                 </div>
                 <div className="p-4 flex flex-col flex-grow">
-                  <div className="lg:text-[24px] xs:text-[16px] font-semibold mb-2">
+                  <div className="text-xl font-semibold mb-2 truncate">
                     {truncateText(product.name || "Title", 24)}
                   </div>
-                  <div className="lg:text-[18px] xs:text-[14px] font-light mb-2">
+                  <div className="text-base font-light mb-2 truncate">
                     {product.description}
                   </div>
-                  <div className="mt-auto text-[24px] font-semibold">
+                  <div className="mt-auto text-xl font-semibold">
                     ${product.price.toFixed(2)}
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 import React from "react"
 import Image from "next/image"
 import { images, fonts, Icon } from "@/constants"
+import Link from "next/link"
 
 function Footer() {
   return (
@@ -40,24 +41,23 @@ function Footer() {
             <div className="grid lg:grid-cols-4 text-white pt-12 gap-0 xs:space-y-12 lg:space-y-0">
 
               <div className="lg:flex lg:justify-start lg:items-center flex-shrink-0">
-                <Image src={images.logo_white} width={115} height={68} alt="Logo" className="xs:mx-auto lg:mx-0" />
+                <Image src={images.logo} width={115} height={68} alt="Logo" className="xs:mx-auto lg:mx-0" />
               </div>
 
               <div className="text-center lg:text-left xs:mx-4 lg:ml-[-10px]">
                 <h2 className="text-[24px] leading-[32px] font-semibold mb-4">Información</h2>
                 <ul className="list-inside text-[22px]">
-                  <li>Mi Carrito</li>
-                  <li>Login</li>
-                  <li>Mi Cuenta</li>
+                  <li><Link href="/carrito">Mi Carrito</Link></li>
+                  <li><Link href="/iniciar-sesion">Login</Link></li>
                 </ul>
               </div>
 
               <div className="text-center lg:text-left xs:mx-4 lg:ml-[-10px]">
                 <h2 className="text-[24px] leading-[32px] font-semibold mb-4">Servicios</h2>
                 <ul className="list-inside text-[22px]">
-                  <li>Inicio</li>
-                  <li>Productos</li>
-                  <li>Contacto</li>
+                  <li><Link href="/">Inicio</Link></li>
+                  <li><Link href="/productos">Productos</Link></li>
+                  <li><Link href="/contacto">Contacto</Link></li>
                 </ul>
               </div>
 

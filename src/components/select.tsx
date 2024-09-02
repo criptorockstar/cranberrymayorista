@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Icon } from "@/constants"
 
 interface SelectOptionProps {
   value: string;
@@ -35,34 +34,16 @@ const SelectOption: React.FC<SelectOptionProps> = ({
     updateValue(value);
   };
 
-  if (!icon) {
-    icon = (
-      <svg
-        className="h-5 w-5"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path
-          fillRule="evenodd"
-          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-          clipRule="evenodd"
-        ></path>
-      </svg>
-    );
-  }
-
   return (
     <li
       className={`
-      z-10 cursor-default
+      z-10 cursor-default pt-4
     hover:bg-[#0a1d35] hover:text-white select-none relative py-2 pl-3 pr-9 'text-gray-900'} ${className}
       `}
       onClick={handleChange}
     >
       <div className="flex items-center">
-        <span className="ml-3 block font-normal truncate">{value}</span>
+        <span className="ml-3 block font-normal truncate text-[12px]">{value}</span>
       </div>
       {active && (
         <span className="absolute inset-y-0 right-0 flex items-center pr-4">
@@ -157,16 +138,13 @@ const Select: React.FC<SelectProps> = ({
         </span>
       </button>
       {state.showOptions && (
-        <div className={`
-            absolute mt-1 w-full z-30 rounded-md shadow-lg text-white bg-[#0a1d35]
-          `}
-          style={{ width: 'auto', minWidth: 'fit-content', zIndex: '10' }}
-        >
+        <div className="absolute mt-1 w-full z-30 rounded-md shadow-lg text-white bg-[#0a1d35]">
           <ul
             className={`
             max-h-56 rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto
             focus:outline-none ${className}
           `}
+            style={{ width: '100%' }} // Ensure the options dropdown matches the button width
           >
             {options.map((option, idx) => (
               <SelectOption

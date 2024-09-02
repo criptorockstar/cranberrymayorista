@@ -4,6 +4,7 @@ export interface ICategoryState {
   id?: number;
   image?: string;
   name?: string;
+  slug?: string;
 }
 
 export interface CategoriesState {

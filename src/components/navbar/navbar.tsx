@@ -26,7 +26,7 @@ function Navbar() {
   const onSelectChange = (value: string) => {
     console.log(value);
     if (value === "Cerrar sesión") {
-      // Add your logout logic here
+
     }
 
     if (value === "Administrar") {
@@ -39,7 +39,7 @@ function Navbar() {
   return (
     <React.Fragment>
       <div className="w-full">
-        <div className="max-w-screen-lg mx-auto py-4">
+        <div className="max-w-screen-lg mx-auto py-4 lg:py-0">
           {isDesktop ?
             <div className="flex flex-row justify-between items-center max-w-screen-lg mx-auto">
               <div>
@@ -69,7 +69,7 @@ function Navbar() {
                     value="Mi cuenta"
                     options={selectOptions}
                     updateValue={onSelectChange}
-                    className="z-20 bg-[#0a1d35] capitalize hover:cursor-pointer"
+                    className="z-20 bg-[#0a1d35] capitalize hover:cursor-pointer mt-[-8px]"
                     textColor="text-white"
                   />
                 )}
@@ -78,13 +78,15 @@ function Navbar() {
             :
             <div className="flex flex-row justify-between mx-6">
               <div>
-                <Button isIconOnly href="#" className="rounded-full" size="lg">
+                <Button
+                  onClick={() => router.push("/carrito")}
+                  isIconOnly className="rounded-full" size="lg">
                   <Icon icon="icon-shopping_bag" color="black" className="text-[24px]" />
                 </Button>
               </div>
 
               <div className="flex items-center justify-center">
-                <Image src={images.logo} width={80} height={40} alt="Logo" className="mt-[-17px]" />
+                <Image src={images.logo} width={90} height={70} alt="Logo" className="mt-[-22px]" />
               </div>
 
               <div>
@@ -104,19 +106,25 @@ function Navbar() {
               <div className="w-[250px] mx-auto">
                 <div className="flex flex-row justify-between">
                   <div>
-                    <Button isIconOnly href="#" className="rounded-full bg-black" size="lg">
+                    <Button
+                      onClick={() => router.push("/")}
+                      isIconOnly href="#" className="rounded-full bg-black w-[60px] h-[60px]" size="lg">
                       <Icon icon="icon-home" color="white" className="text-[24px]" />
                     </Button>
                   </div>
 
                   <div>
-                    <Button isIconOnly href="#" className="rounded-full bg-black" size="lg">
+                    <Button
+                      onClick={() => router.push("/productos")}
+                      isIconOnly href="#" className="rounded-full bg-black w-[60px] h-[60px]" size="lg">
                       <Icon icon="icon-store_outline" color="white" className="text-[24px]" />
                     </Button>
                   </div>
 
                   <div>
-                    <Button isIconOnly href="#" className="rounded-full bg-black" size="lg">
+                    <Button
+                      onClick={() => router.push("/contacto")}
+                      isIconOnly href="#" className="rounded-full bg-black w-[60px] h-[60px]" size="lg">
                       <Icon icon="icon-location_outline" color="white" className="text-[24px]" />
                     </Button>
                   </div>
