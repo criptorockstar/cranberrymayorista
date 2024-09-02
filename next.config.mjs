@@ -38,6 +38,10 @@ const nextConfig = {
         source: "/productos/:slug",
         destination: "/products/:slug",
       },
+      {
+        source: "/findus",
+        destination: "/encuentranos",
+      },
     ];
   },
 };

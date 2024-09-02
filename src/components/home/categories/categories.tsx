@@ -24,7 +24,7 @@ function Categories() {
 
   return (
     <React.Fragment>
-      <div className="w-full max-w-[1200px] mx-auto lg:pt-10 px-4">
+      <div className="w-full max-w-[1200px] mx-auto pt-10 px-4">
         <Carousel className="w-full max-w-[1200px] mx-auto">
           <div className="flex flex-row justify-between items-center mb-[60px] w-full pr-8">
             <div className="w-full max-w-[1100px] mx-auto">
@@ -57,7 +57,7 @@ function Categories() {
                       height={68}
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-30 rounded-[4px]" />
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                    <div className="hidden absolute bottom-4 left-1/2 transform -translate-x-1/2">
                       <div className="text-center select-none text-white font-semibold">{category.name || "Unnamed Category"}</div>
                     </div>
                   </Link>

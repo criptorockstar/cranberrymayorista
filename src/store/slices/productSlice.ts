@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// Interfaces para colores y talles
+// Interfaces para colores, tallas e imágenes
 export interface IColor {
   id: number;
   name: string;
@@ -11,9 +11,14 @@ export interface ISize {
   name: string;
 }
 
+export interface IImage {
+  id: number;
+  url: string;
+}
+
 export interface IProduct {
   id: number;
-  image?: string;
+  images: IImage[]; // Lista de imágenes del producto
   name?: string;
   slug?: string;
   description: string;
@@ -21,15 +26,15 @@ export interface IProduct {
   price: number;
   discount: number;
   featured: boolean;
+  colors: IColor[];
+  sizes: ISize[];
 }
 
-// Estado global que incluye productos, colores, talles y relaciones
+// Estado global que incluye productos, colores y tallas independientes
 export interface ProductState {
   products: IProduct[];
   colors: IColor[];
   sizes: ISize[];
-  productColors: { [productId: number]: IColor[] }; // Colores por producto
-  productSizes: { [productId: number]: ISize[] }; // Talles por producto
 }
 
 // Estado inicial
@@ -37,8 +42,6 @@ const initialState: ProductState = {
   products: [],
   colors: [],
   sizes: [],
-  productColors: {},
-  productSizes: {},
 };
 
 // Slice de Redux
@@ -64,27 +67,13 @@ export const productSlice = createSlice({
     clearProductsState: (state) => {
       state.products = [];
     },
-    // Establecer el estado de colores
+    // Establecer el estado de colores globales
     setColorsState: (state, action: PayloadAction<IColor[]>) => {
       state.colors = action.payload;
     },
-    // Establecer el estado de talles
+    // Establecer el estado de tallas globales
     setSizesState: (state, action: PayloadAction<ISize[]>) => {
       state.sizes = action.payload;
-    },
-    // Establecer colores para un producto
-    setProductColors: (
-      state,
-      action: PayloadAction<{ productId: number; colors: IColor[] }>,
-    ) => {
-      state.productColors[action.payload.productId] = action.payload.colors;
-    },
-    // Establecer talles para un producto
-    setProductSizes: (
-      state,
-      action: PayloadAction<{ productId: number; sizes: ISize[] }>,
-    ) => {
-      state.productSizes[action.payload.productId] = action.payload.sizes;
     },
   },
 });
@@ -97,8 +86,6 @@ export const {
   clearProductsState,
   setColorsState,
   setSizesState,
-  setProductColors,
-  setProductSizes,
 } = productSlice.actions;
 
 // Exportar el reducer
@@ -107,12 +94,43 @@ export const productReducer = productSlice.reducer;
 // Selectores
 import { RootState } from "@/store";
 
-// Selector para obtener los colores de un producto
-export const selectProductColors = (state: RootState, productId: number) => {
-  return state.product.productColors[productId] || [];
+// Selector para obtener las imágenes de un producto
+export const selectProductImages = (
+  state: RootState,
+  productId: number,
+): IImage[] => {
+  const product = state.product.products.find(
+    (product) => product.id === productId,
+  );
+  return product?.images || [];
 };
 
-// Selector para obtener los talles de un producto
-export const selectProductSizes = (state: RootState, productId: number) => {
-  return state.product.productSizes[productId] || [];
+// Selector para obtener los colores de un producto
+export const selectProductColors = (
+  state: RootState,
+  productId: number,
+): IColor[] => {
+  const product = state.product.products.find(
+    (product) => product.id === productId,
+  );
+  return product?.colors || [];
 };
+
+// Selector para obtener las tallas de un producto
+export const selectProductSizes = (
+  state: RootState,
+  productId: number,
+): ISize[] => {
+  const product = state.product.products.find(
+    (product) => product.id === productId,
+  );
+  return product?.sizes || [];
+};
+
+// Selector para obtener los colores globales no asociados a un producto
+export const selectGlobalColors = (state: RootState): IColor[] =>
+  state.product.colors;
+
+// Selector para obtener las tallas globales no asociadas a un producto
+export const selectGlobalSizes = (state: RootState): ISize[] =>
+  state.product.sizes;

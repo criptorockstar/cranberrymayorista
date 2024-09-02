@@ -22,10 +22,11 @@ import {
   clearProductsState,
   setColorsState,
   setSizesState,
-  setProductColors,
-  setProductSizes,
+  selectProductImages,
   selectProductColors,
   selectProductSizes,
+  selectGlobalColors,
+  selectGlobalSizes,
 } from "./productSlice";
 
 export {
@@ -46,8 +47,9 @@ export {
   clearProductsState,
   setColorsState,
   setSizesState,
-  setProductColors,
-  setProductSizes,
+  selectProductImages,
   selectProductColors,
   selectProductSizes,
+  selectGlobalColors,
+  selectGlobalSizes,
 };

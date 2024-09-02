@@ -6,7 +6,7 @@ import { Button } from "@nextui-org/react";
 import { useAppSelector } from "@/store";
 import { useProduct } from "@/store/hooks";
 import placeholderImage from "@/assets/images/logo_old.svg";
-import Link from "next/link"
+import Link from "next/link";
 
 // Función para truncar el texto
 const truncateText = (text: string, maxLength: number) => {
@@ -42,38 +42,47 @@ function Products() {
       <div className="max-w-[1200px] mx-auto">
         <div className="w-full max-w-[1200px]">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {currentProducts.map((product) => (
-              <Link href={`/productos/${product.slug}`} key={product.id} className="relative flex flex-col bg-white rounded-md overflow-hidden shadow-lg transition-transform transform hover:scale-105 group">
-                <div className="relative flex-grow">
-                  <Image
-                    src={product.image || placeholderImage}
-                    alt={product.name || "Product Image"}
-                    className="w-full h-[200px] object-cover"
-                    width={500}
-                    height={300}
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-30 rounded-md opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
-                  <Button
-                    onClick={addToCart}
-                    className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-[#0a1d35] text-white rounded-md px-8 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    data-hover={false}
-                  >
-                    Add to cart
-                  </Button>
-                </div>
-                <div className="p-4 flex flex-col flex-grow">
-                  <div className="text-xl font-semibold mb-2 truncate">
-                    {truncateText(product.name || "Title", 24)}
+            {currentProducts.map((product) => {
+              // Accede a la primera imagen del producto
+              const mainImage = product.images[0]?.url || placeholderImage;
+
+              return (
+                <Link
+                  href={`/productos/${product.slug}`}
+                  key={product.id}
+                  className="relative flex flex-col bg-white rounded-md overflow-hidden shadow-lg transition-transform transform hover:scale-105 group"
+                >
+                  <div className="relative flex-grow">
+                    <Image
+                      src={mainImage}
+                      alt={product.name || "Product Image"}
+                      className="w-full h-[200px] object-cover"
+                      width={500}
+                      height={300}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-30 rounded-md opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
+                    <Button
+                      onClick={addToCart}
+                      className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-[#0a1d35] text-white rounded-md px-8 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      data-hover={false}
+                    >
+                      Add to cart
+                    </Button>
                   </div>
-                  <div className="text-base font-light mb-2 truncate">
-                    {product.description}
+                  <div className="p-4 flex flex-col flex-grow">
+                    <div className="text-xl font-semibold mb-2 truncate">
+                      {truncateText(product.name || "Title", 24)}
+                    </div>
+                    <div className="text-base font-light mb-2 truncate">
+                      {product.description}
+                    </div>
+                    <div className="mt-auto text-xl font-semibold">
+                      ${product.price.toFixed(2)}
+                    </div>
                   </div>
-                  <div className="mt-auto text-xl font-semibold">
-                    ${product.price.toFixed(2)}
-                  </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="flex justify-center mt-8">

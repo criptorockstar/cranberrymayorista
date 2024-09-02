@@ -10,7 +10,7 @@ export default function Home() {
 
       <div className="flex justify-center pt-4">
         <div className="w-full max-w-[1200px] flex">
-          <Image src={images.banner} alt="" width={1200} className="w-full max-w-[1180px] mx-auto pl-[13px]" />
+          <Image src={images.banner} alt="" width={1200} className="w-full max-w-[1180px] mx-auto" />
         </div>
       </div>
 

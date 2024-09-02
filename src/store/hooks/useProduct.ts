@@ -14,14 +14,14 @@ const useProduct = () => {
   const [error, setError] = useState<string | null>(null);
   const dispatch = useAppDispatch();
 
-  // Memoiza fetchCategories para evitar que se vuelva a crear en cada renderizado
+  // Fetch de productos
   const fetchProducts = useCallback(async () => {
     setLoading(true);
     setError(null);
 
     try {
       const response = await axios.get("/products");
-      // Despachar las categorías al estado global de Redux
+      // Despachar los productos al estado global de Redux
       dispatch(setProductsState(response.data));
       return response.data;
     } catch (err: any) {
@@ -30,15 +30,16 @@ const useProduct = () => {
     } finally {
       setLoading(false);
     }
-  }, [dispatch]); // Dependencias de useCallback
+  }, [dispatch]);
 
+  // Fetch de colores
   const fetchColors = useCallback(async () => {
     setLoading(true);
     setError(null);
 
     try {
       const response = await axios.get("/products/colors");
-      // Despachar las categorías al estado global de Redux
+      // Despachar los colores al estado global de Redux
       dispatch(setColorsState(response.data));
       return response.data;
     } catch (err: any) {
@@ -47,15 +48,16 @@ const useProduct = () => {
     } finally {
       setLoading(false);
     }
-  }, [dispatch]); // Dependencias de useCallback
+  }, [dispatch]);
 
+  // Fetch de tallas
   const fetchSizes = useCallback(async () => {
     setLoading(true);
     setError(null);
 
     try {
       const response = await axios.get("/products/sizes");
-      // Despachar las categorías al estado global de Redux
+      // Despachar las tallas al estado global de Redux
       dispatch(setSizesState(response.data));
       return response.data;
     } catch (err: any) {
@@ -64,7 +66,7 @@ const useProduct = () => {
     } finally {
       setLoading(false);
     }
-  }, [dispatch]); // Dependencias de useCallback
+  }, [dispatch]);
 
   return { loading, error, fetchProducts, fetchColors, fetchSizes };
 };
